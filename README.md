@@ -2,7 +2,15 @@
 General Purpose Task Management Software
 
 v_0.1:
-  Instructions - 
-      1. Place all v_0.1 files into a folder (you can name the folder anything).
-      2. Create a folder within the folder created in step 1. ^^^ and name it "SavedData".
-         If folder in step 2 is not created you cannot run fileIO as __main__.
+
+
+Disclaimer
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+THE USE OR OTHER DEALINGS IN THE SOFTWARE.
