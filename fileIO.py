@@ -1,7 +1,7 @@
 from pathlib import Path
 from grid import Grid
-from calendar import Calendar
-class fileIO:
+from clCalendar import CLCalendar
+class FileIO:
     @classmethod
     def writeDataTo(self, reprData, fileName):
         filePath = Path.cwd() / "SavedData" / (fileName + ".cSheet")
@@ -21,5 +21,5 @@ class fileIO:
         
 if __name__ == "__main__":
     gObj = Grid.fromRepr("1/1,1/2\nA,B\nNone,X\nX,None")
-    fileIO.writeDataTo(repr(gObj), "test")
-    print(fileIO.readDataFrom("test"))
+    FileIO.writeDataTo(repr(gObj), "test")
+    print(FileIO.readDataFrom("test"))

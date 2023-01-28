@@ -1,7 +1,7 @@
 from datetime import date
 from calendar import monthrange
 
-class clCalendar:
+class CLCalendar:
     def __init__(self):
         #RAW_CD is a constant value(CD stands for CurrentDate).
         #Useful for resetting rawCD.
@@ -16,7 +16,7 @@ class clCalendar:
         self._rawCD = self._RAW_CD
         print("This is reset: " + str(self._rawCD))
 
-    def getDayRange(self) -> tuple: #tuple of int at index 0 & 1!
+    def getDayRangeForCurrentDate(self) -> tuple: #tuple of int at index 0 & 1!
         #index 0: Enum of day name of first day of month.
         #         (ex. 0-6 -> Mon-Sun)
         #
@@ -24,6 +24,20 @@ class clCalendar:
         #         month _rawCD is set to).
         
         return monthrange(self._rawCD.year, self._rawCD.month)
+
+    def _counter(self, unit, start, stop):
+        if unit == "month":
+            for i range(start, stop):
+                
+
+    def getDayRangeBetweenDates(self, y1, m1, d1, y2, m2, d2) -> list:
+        #For two specified Dates, (m1/d1/y1 and m2/d2/y2), get all the days in-between both dates (inclusive).
+        #All the inclusive dates in-between the two specified dates must be in the form m/d/y as a str.
+        outDayRange = []
+        yearSame = y1 == y2
+        monthSame = m1 == m2
+        daySame = d1 == d2
+        
 
     def getCurrentDate(self) -> date:
         return self._rawCD
@@ -49,7 +63,7 @@ class clCalendar:
         print("This is temp: " + str(temp))
         self._rawCD = temp
 
-    
+ 
         
 
 if __name__ == "__main__":
