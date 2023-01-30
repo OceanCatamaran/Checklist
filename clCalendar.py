@@ -33,10 +33,30 @@ class CLCalendar:
     def getDayRangeBetweenDates(self, y1, m1, d1, y2, m2, d2) -> list:
         #For two specified Dates, (m1/d1/y1 and m2/d2/y2), get all the days in-between both dates (inclusive).
         #All the inclusive dates in-between the two specified dates must be in the form m/d/y as a str.
+        currentDay = d1
+        currentMonth = m1
+        currentYear = y1
         outDayRange = []
         yearSame = y1 == y2
         monthSame = m1 == m2
         daySame = d1 == d2
+        
+        while(True):
+            try:
+                print(currentMonth)
+                if(currentDay >= d2 and currentMonth >= m2 and currentYear >= y2):
+                    break
+                date(currentYear,currentMonth, currentDay)
+                outDayRange.append(str(currentMonth) + "/" + str(currentDay) + "/" + str(currentYear))                
+                currentDay+=1
+            except ValueError:
+                currentDay = 1
+                if(currentMonth == 12):
+                    currentMonth = 1
+                    currentYear+=1
+                else:
+                    currentMonth+=1
+        return outDayRange
         
 
     def getCurrentDate(self) -> date:
@@ -86,4 +106,7 @@ if __name__ == "__main__":
     #Test 5
     cObj.reset()
     print(str(cObj.getCurrentDate()))
-    print(str(cObj.getDayRange()))
+    print(str(cObj.getDayRange())
+    #Test getDayRangeBetweenDates
+    print(cObj.getDayRangeBetweenDates(2001, 1, 1, 2001, 2, 1))
+    print(cObj.getDayRangeBetweenDates(2001, 1, 1, 2002, 2, 1))
