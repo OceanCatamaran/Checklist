@@ -37,7 +37,7 @@ class CLCalendar:
         while(True):
             try:
                 #print(currentMonth)
-                if(currentDay >= d2 and currentMonth >= m2 and currentYear >= y2):
+                if(currentDay > d2 and currentMonth >= m2 and currentYear >= y2):
                     break
                 date(currentYear,currentMonth, currentDay)
                 outDayRange.append(str(currentMonth) + "/" + str(currentDay) + "/" + str(currentYear))                
