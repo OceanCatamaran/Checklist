@@ -20,14 +20,10 @@ class CLCalendar:
         #index 0: Enum of day name of first day of month.
         #         (ex. 0-6 -> Mon-Sun)
         #
-        #index 1: Total num days in month (based on year and
+        #index 1: Total num days in month (based on year and 
         #         month _rawCD is set to).
         
         return monthrange(self._rawCD.year, self._rawCD.month)
-
-    def _counter(self, unit, start, stop):
-        if unit == "month":
-            for i range(start, stop):
                 
 
     def getDayRangeBetweenDates(self, y1, m1, d1, y2, m2, d2) -> list:
@@ -37,13 +33,10 @@ class CLCalendar:
         currentMonth = m1
         currentYear = y1
         outDayRange = []
-        yearSame = y1 == y2
-        monthSame = m1 == m2
-        daySame = d1 == d2
         
         while(True):
             try:
-                print(currentMonth)
+                #print(currentMonth)
                 if(currentDay >= d2 and currentMonth >= m2 and currentYear >= y2):
                     break
                 date(currentYear,currentMonth, currentDay)
@@ -87,26 +80,27 @@ class CLCalendar:
         
 
 if __name__ == "__main__":
-    cObj = clCalendar()
+    cObj = CLCalendar()
     #Test 1
     print(str(cObj.getCurrentDate()))
-    print(str(cObj.getDayRange()))
+    print(str(cObj.getDayRangeForCurrentDate()))
     #Test 2
     cObj.setCurrentDate(2022)
     print(str(cObj.getCurrentDate()))
-    print(str(cObj.getDayRange()))
+    print(str(cObj.getDayRangeForCurrentDate()))
     #Test 3
     cObj.setCurrentDate(month=4)
     print(str(cObj.getCurrentDate()))
-    print(str(cObj.getDayRange()))
+    print(str(cObj.getDayRangeForCurrentDate()))
     #Test 4
     cObj.setCurrentDate(day=4)
     print(str(cObj.getCurrentDate()))
-    print(str(cObj.getDayRange()))
+    print(str(cObj.getDayRangeForCurrentDate()))
     #Test 5
     cObj.reset()
     print(str(cObj.getCurrentDate()))
-    print(str(cObj.getDayRange())
-    #Test getDayRangeBetweenDates
-    print(cObj.getDayRangeBetweenDates(2001, 1, 1, 2001, 2, 1))
-    print(cObj.getDayRangeBetweenDates(2001, 1, 1, 2002, 2, 1))
+    print(str(cObj.getDayRangeForCurrentDate()))
+    #Test 6 getDayRangeBetweenDates
+    print()
+    print(cObj.getDayRangeBetweenDates(2023, 2, 1, 2023, 3, 1))
+    print(cObj.getDayRangeBetweenDates(2024, 2, 1, 2024, 3, 1))
