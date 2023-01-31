@@ -33,6 +33,14 @@ class FileIO:
         for name in glob.glob(filePath):
             outFileNames.append(str(os.path.basename(name))[:-7])
         return outFileNames
+
+    @classmethod
+    def deleteFile(self, fileName) -> None:
+        try:
+            filePath = Path.cwd() / "SavedData" / (fileName + ".cSheet")
+            os.remove(filePath)
+        except:
+            print("Invalid selectedFileName.")
         
 if __name__ == "__main__":
     #gObj = Grid.fromRepr("1/1,1/2\nA,B\nNone,X\nX,None")
