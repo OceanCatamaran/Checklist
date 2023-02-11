@@ -11,6 +11,7 @@ class EntryReader:
             return outInt if outInt >= 0 else 0
         except Exception:
             print("Please ensure inputted value is a positive whole number.")
+            return 0
 
     @classmethod
     def getCallBack(self, erObj):
