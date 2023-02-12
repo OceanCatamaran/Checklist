@@ -1,5 +1,6 @@
 from tkinter import *
 from sizeableList import SizeableList
+from EntryReader import EntryReader
 
 class ObjectListBox:
 
@@ -32,13 +33,13 @@ class ObjectListBox:
         self._slObj.setSize(size)
         self._refresh()
 
-    def increment(self):
-        incrementedSize = len(self._slObj.getList()) + 1
+    def increment(self, erValue = 1):
+        incrementedSize = len(self._slObj.getList()) + erValue
         self._slObj.setSize(incrementedSize)
         self._refresh()
 
-    def decrement(self):
-        decrementedSize = len(self._slObj.getList()) - 1
+    def decrement(self, erValue = 1):
+        decrementedSize = len(self._slObj.getList()) - erValue
         self._slObj.setSize(decrementedSize)
         self._refresh()
 
@@ -55,46 +56,3 @@ class ObjectListBox:
 
     def yview(self):
         return self._LBObj.yview
-
-top = Tk()
-
-scrollbar = Scrollbar(top)
-scrollbar.pack(side = RIGHT, fill = Y)
-
-OLB1 = ObjectListBox(top, 5, yscrollcommand = scrollbar.set)
-
-entryObj = Entry(top)
-
-
-def selectCallBack():
-    selection = OLB1.selection()
-    if len(selection) == 0:
-        selection = None
-    #.get only retrieves the selected line in the Listbox, and its parallel in
-    # the sizeableList object.
-    if selection != None:
-        OLB1.insertAt(selection[0], entryObj.get())
-        print(OLB1.get(selection[0]))
-
-def decrementCallBack():
-    OLB1.decrement()
-
-def incrementCallBack():
-    OLB1.increment()
-    
-  
-b1 = Button(top, text = "select", command = selectCallBack)
-
-frameObj = Frame(top)
-leftB = Button(frameObj, text = "-", command = decrementCallBack)
-rightB = Button(frameObj, text = "+", command = incrementCallBack)
-leftB.pack(side = LEFT, fill = X)
-rightB.pack(side = RIGHT, fill = X)
-
-
-OLB1.pack()
-scrollbar.config(command = OLB1.yview())
-b1.pack()
-entryObj.pack()
-frameObj.pack(fill = X)
-top.mainloop()
