@@ -16,6 +16,7 @@ class CLCalendar:
         self._rawCD = self._RAW_CD
         print("This is reset: " + str(self._rawCD))
 
+    '''#Rename method for clarity'''
     def getDayRangeForCurrentDate(self) -> tuple: #tuple of int at index 0 & 1!
         #index 0: Enum of day name of first day of month.
         #         (ex. 0-6 -> Mon-Sun)
@@ -25,7 +26,7 @@ class CLCalendar:
         
         return monthrange(self._rawCD.year, self._rawCD.month)
                 
-
+    '''#Rename method for clarity'''
     def getDayRangeBetweenDates(self, y1, m1, d1, y2, m2, d2) -> list:
         #For two specified Dates, (m1/d1/y1 and m2/d2/y2), get all the days in-between both dates (inclusive).
         #All the inclusive dates in-between the two specified dates must be in the form m/d/y as a str.
@@ -76,7 +77,11 @@ class CLCalendar:
         print("This is temp: " + str(temp))
         self._rawCD = temp
 
- 
+    '''#Create the following methods:
+        #getDayRangeBetweenDates
+        #getMonthRangeBetweenDates
+        #getYearRangeBetweenDates
+        #getYearlessDateRangeBetweenDates'''
         
 
 if __name__ == "__main__":
