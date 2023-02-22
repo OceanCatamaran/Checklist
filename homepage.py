@@ -2,7 +2,7 @@ from tkinter import *
 
 # initialize home page window
 home_page = Tk(className="Home")
-home_page.geometry("500x250")
+home_page.geometry("600x600")
 
 # create frame for options
 option_frame = Frame(home_page)
