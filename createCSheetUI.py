@@ -26,7 +26,7 @@ datOLB = ObjectListBox(datViewport, 5, yscrollcommand = datScrollbar.set)
 datOLB.pack()
 
 #inputs beneath catViewport
-catCFrame = Frame(top, width = 140, height = 140, relief = "groove", borderwidth = 2)
+catCFrame = Frame(top, width = 140, height = 180, relief = "groove", borderwidth = 2)
     #The C in catCFrame stands for controller (as it controls the cat. data)
 catEntryObj = Entry(catCFrame, width = 15)
 catNumEntryObj = Entry(catCFrame, width = 5)
@@ -34,7 +34,7 @@ catNumEntryObj.insert(0, "1")
 catERObj = EntryReader(catNumEntryObj)
 
 #inputs beneath dateViewPort
-datCFrame = Frame(top, width = 140, height = 140, relief = "groove", borderwidth = 2)
+datCFrame = Frame(top, width = 140, height = 180, relief = "groove", borderwidth = 2)
 datEntryObjBeg = Entry(datCFrame, width = 15)
 datEntryObjEnd = Entry(datCFrame, width = 15)
 datUnit = IntVar()
@@ -60,10 +60,19 @@ def incrementCallBack():
     catOLB.increment(catERObj.getNumber())
 
 #CallBacks for the datCFrame Controls
-functionList = []
 def datSelectCallBack():
-    temp = datUnit.get()
-    print(str(temp) + " is of type " + str(type(temp)))
+    num = datUnit.get()
+    print(str(num) + " is of type " + str(type(num)))
+    val_1 = datEntryObjBeg.get()
+    val_2 = datEntryObjEnd.get()
+    result = CLCalendar.getColumns(num, val_1, val_2)
+    if result != None:
+        datOLB.overWriteWith(result)
+        print(datOLB.getList())
+            
+    
+
+    
 '''
 #mouseCallback taken from this site...
 ##Link: https://www.tutorialspoint.com/mouse-position-in-python-tkinter   
@@ -83,10 +92,12 @@ rightB = Button(catCFrame, text = "+", command = incrementCallBack, width = 2, h
 
 #datCFrame Controls
 datSet = Button(datCFrame, text = "set", command = datSelectCallBack, width = 3, height = 1)
-dayRB = Radiobutton(datCFrame, text = "day", variable = datUnit, value = 1)
-monthRB = Radiobutton(datCFrame, text = "month", variable = datUnit, value = 2)
-yearRB = Radiobutton(datCFrame, text = "year", variable = datUnit, value = 3)
-dateRB = Radiobutton(datCFrame, text = "date", variable = datUnit, value = 4)
+RB_1 = Radiobutton(datCFrame, text = "DateRange", variable = datUnit, value = 1)
+RB_2 = Radiobutton(datCFrame, text = "YearlessDateRange", variable = datUnit, value = 2)
+RB_3 = Radiobutton(datCFrame, text = "YearRange", variable = datUnit, value = 3)
+RB_4 = Radiobutton(datCFrame, text = "MonthRange", variable = datUnit, value = 4)
+RB_5 = Radiobutton(datCFrame, text = "DayRange", variable = datUnit, value = 5)
+RB_6 = Radiobutton(datCFrame, text = "NumRange", variable = datUnit, value = 6)
 
 #Laying out catCFrame
 catEntryObj.place(x = 0, y = 3)
@@ -99,10 +110,12 @@ rightB.place(x = 110, y = 40)
 datEntryObjBeg.place(x = 0, y = 0)
 datEntryObjEnd.place(x = 0, y = 20)
 datSet.place(x = 97, y = 0)
-dayRB.place(x = 0, y = 40)
-monthRB.place(x = 0, y = 60)
-yearRB.place(x = 0, y = 80)
-dateRB.place(x = 0, y = 100)
+RB_1.place(x = 0, y = 40)
+RB_2.place(x = 0, y = 60)
+RB_3.place(x = 0, y = 80)
+RB_4.place(x = 0, y = 100)
+RB_5.place(x = 0, y = 120)
+RB_6.place(x = 0, y = 140)
 
 #Laying out top window 
 catViewport.place(x = 0, y = 0)

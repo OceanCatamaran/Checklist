@@ -29,6 +29,10 @@ class ObjectListBox:
         self._slObj.insertAt(index, value)
         self._refresh()
 
+    def overWriteWith(self, values):
+        self._slObj.overWriteWith(values)
+        self._refresh()
+
     def setSize(self, size):
         self._slObj.setSize(size)
         self._refresh()
@@ -50,6 +54,9 @@ class ObjectListBox:
 
     def get(self, index):
         return (self._LBObj.get(index), self._slObj.getList()[index])
+
+    def getList(self):
+        return self._slObj.getList()
 
     def pack(self):
         self._LBObj.pack()

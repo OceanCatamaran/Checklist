@@ -25,6 +25,9 @@ class SizeableList:
     def insertAt(self, index, value):
         self._list[index] = value
 
+    def overWriteWith(self, values):
+        self._list = values
+
     def getList(self):
         return self._list
 
@@ -63,6 +66,9 @@ if __name__ == "__main__":
     slObj.setSize(7)
     print(slObj)
     print("len: " + str(len(slObj)))
+    print("Overwriting with [1,2,3]:")
+    slObj.overWriteWith([1,2,3])
+    print(slObj)
 
 ##    print("\nTriggering value error:")
 ##    slObj2 = SizeableList(-1)

@@ -13,7 +13,7 @@ class CLCalendar:
         self._RAW_CD = date.today()
         self._rawCD = self._RAW_CD
     '''
-
+    @classmethod
     def reset(self):
         #Resets _rawCD with the Constant RAW_CD (which grabs
         #todays date using date class)
@@ -23,10 +23,12 @@ class CLCalendar:
         _rawCD = _RAW_CD
         print("This is reset: " + self.getCurrentDate())       
 
+    @classmethod
     def getCurrentDate(self) -> date:
         global _rawCD
         return "/".join([str(_rawCD.month), str(_rawCD.day), str(_rawCD.year)])
 
+    @classmethod
     def setCurrentDate(self,
                        year : int = None,
                        month : int = None,
@@ -50,6 +52,7 @@ class CLCalendar:
         _rawCD = temp
 
     '''#Rename method for clarity'''
+    @classmethod
     def getDayRangeForCurrentDate(self) -> tuple: #tuple of int at index 0 & 1!
         #index 0: Enum of day name of first day of month.
         #         (ex. 0-6 -> Mon-Sun)
@@ -60,7 +63,7 @@ class CLCalendar:
         
         return monthrange(_rawCD.year, _rawCD.month)
                 
-
+    @classmethod
     def getDateRangeBetweenDates(self, y1, m1, d1, y2, m2, d2) -> list:
         #For two specified Dates, (m1/d1/y1 and m2/d2/y2), get all the days in-between both dates (inclusive).
         #All the inclusive dates in-between the two specified dates must be in the form m/d/y as a str.
@@ -86,6 +89,7 @@ class CLCalendar:
                     currentMonth+=1
         return outDateRange
 
+    @classmethod
     def getYearlessDateRangeBetweenDates(self, y1, m1, d1, y2, m2, d2) -> list:
         temp = self.getDateRangeBetweenDates(y1, m1, d1, y2, m2, d2)
         outYearlessDateRange = []
@@ -94,24 +98,89 @@ class CLCalendar:
             outYearlessDateRange.append("/".join(mdy))
         return outYearlessDateRange
 
+    @classmethod
     def getYearRangeBetweenYears(self, y1, y2) -> list:
+        if y1 > y2 : raise ValueError("Beginning number greater than ending number.")
         return [str(year) for year in range(y1, (y2 + 1))]
-    
+
+    @classmethod
     def getMonthRangeBetweenMonths(self, m1, m2) -> list:
+        if m1 > m2 : raise ValueError("Beginning number greater than ending number.")
         if (m1 < 1 or m1 > 12) or (m2 < 1 or m2 > 12):
-            raise ValueError("month inputs cannot be less than 0 or greater than 12.")
+            raise ValueError("month inputs cannot be less than 1 or greater than 12.")
         return [str(month) for month in range(m1, (m2 + 1))]
-    
+
+    @classmethod
     def getDayRangeBetweenDays(self, d1, d2) -> list:
+        if d1 > d2 : raise ValueError("Beginning number greater than ending number.")
         if (d1 < 1 or d1 > 31) or (d2 < 1 or d2 > 31):
-            raise ValueError("month inputs cannot be less than 0 or greater than 12.")
+            raise ValueError("day inputs cannot be less than 1 or greater than 31.")
         return [str(day) for day in range(d1, (d2 + 1))]
+
+    @classmethod
+    def getNumRangeBetweenNums(self, n1, n2) -> list:
+        if n1 > n2 : raise ValueError("Beginning number greater than ending number.")
+        return [str(num) for num in range(n1, (n2 + 1))]
         
     #Add check for all between methods ensuring that lesser values are passed to 1
     #and higher values are passed to 2.
 
+    def _dateFormatter(val_1, val_2):
+        date_1 = val_1.split("/")
+        if len(date_1) != 3: raise ValueError
+        date_1 = [int(num) for num in date_1]
+        if date_1[0] < 1 or 12 < date_1[0] : raise ValueError
+        if date_1[1] < 1 or 31 < date_1[1] : raise ValueError
+
+        date_2 = val_2.split("/")
+        if len(date_2) != 3: raise ValueError
+        date_2 = [int(num) for num in date_2]
+        if date_2[0] < 1 or 12 < date_2[0] : raise ValueError
+        if date_2[1] < 1 or 31 < date_2[1] : raise ValueError
+
+        for i in [2, 0]:
+            if date_1[i] > date_2[i] : raise ValueError("Beginning number greater than ending number.")
+
+        if date_1[2] == date_2[2]:
+            if date_1[0] == date_2[0]:
+                if date_1[1] > date_2[1] : raise ValueError("Beginning number greater than ending number.")
+
+        return [date_1[2], date_1[0], date_1[1], date_2[2], date_2[0], date_2[1]]
+
+    @classmethod
+    def getColumns(self, methodSelection, val_1, val_2) -> list:
+        try:
+            match methodSelection:
+                case 1:
+                    inputArgs = self._dateFormatter(val_1, val_2)
+                    return self.getDateRangeBetweenDates(*inputArgs)
+                
+                case 2:
+                    inputArgs = self._dateFormatter(val_1, val_2)
+                    return self.getYearlessDateRangeBetweenDates(*inputArgs)
+                    
+                case 3:
+                    return self.getYearRangeBetweenYears(int(val_1), int(val_2))
+
+                case 4:
+                    return self.getMonthRangeBetweenMonths(int(val_1), int(val_2))
+
+                case 5:
+                    return self.getDayRangeBetweenDays(int(val_1), int(val_2))
+
+                case 6:
+                    return self.getNumRangeBetweenNums(int(val_1), int(val_2))
+
+                case default:
+                    return None
+        except:
+            return None
+
+
+
+
 if __name__ == "__main__":
-    cObj = CLCalendar()
+    cObj = CLCalendar
     #Test 1
     print(str(cObj.getCurrentDate()))
     print(str(cObj.getDayRangeForCurrentDate()))
@@ -148,3 +217,24 @@ if __name__ == "__main__":
     #Test 10
     print()
     print(cObj.getDayRangeBetweenDays(1, 31))
+    print()
+    #getColumns Tests
+    #Test 1
+    print("Method Selection 1:")
+    print(cObj.getColumns(1, "2/1/2023", "2/24/2023"))
+    #Test 2
+    print("Method Selection 2:")
+    print(cObj.getColumns(2, "2/1/2023", "2/24/2023"))
+    #Test 3
+    print("Method Selection 3:")
+    print(cObj.getColumns(3, "1900", "2023"))
+    #Test 4
+    print("Method Selection 4:")
+    print(cObj.getColumns(4, "1", "12"))
+    #Test 5
+    print("Method Selection 5:")
+    print(cObj.getColumns(5, "1", "31"))
+    #Test 6
+    print("Method Selection 6:")
+    print(cObj.getColumns(6, "0", "100"))
+    
