@@ -9,6 +9,7 @@ class Grid:
         self._xColumnNum = xColumnNum
         self._dates = []
         self._categories = []
+        self._notes = ""
         self._grid = []
         
         for yRow in range(self._yRowNum):
@@ -21,14 +22,16 @@ class Grid:
         rawData = reprData.split("\n")
         dates = rawData[0].split(",")
         categories = rawData[1].split(",")
+        notes = rawData[2]
         grid = []
-        rawData = rawData[2:]
+        rawData = rawData[3:]
         for yRow in rawData:
             grid.append(yRow.split(","))
 
         outGrid = cls(len(categories), len(dates))
         outGrid.setDates(dates)
         outGrid.setCategories(categories)
+        outGrid.setNotes(notes)
         outGrid._grid = grid
 
         return outGrid
@@ -39,11 +42,17 @@ class Grid:
     def setCategories(self, categories):
         self._categories = categories
 
+    def setNotes(self, notes):
+        self._notes = notes
+
     def getDates(self):
         return self._dates
 
     def getCategories(self):
         return self._categories
+
+    def getNotes(self):
+        return self._notes
 
     def setAt(self, yRow, xColumn, data):
         self._grid[yRow][xColumn] = data
@@ -57,7 +66,7 @@ class Grid:
             formattedGrid.append(str(yRow))
         formattedGrid = "\n".join(formattedGrid)
         
-        outString = f"{self._dates}\n{self._categories}\n{formattedGrid}"
+        outString = f"{self._dates}\n{self._categories}\n{self._notes}\n{formattedGrid}"
 
         return outString
 
@@ -69,13 +78,14 @@ class Grid:
             formattedGrid.append(",".join(yRow))
         formattedGrid = "\n".join(formattedGrid)
         
-        outString = f"{formattedDates}\n{formattedCategories}\n{formattedGrid}"
+        outString = f"{formattedDates}\n{formattedCategories}\n{self._notes}\n{formattedGrid}"
 
         return outString
     
 if __name__ == "__main__":
     dates = ["1/1", "1/2"]
     categories = ["A", "B"]
+    notes = "Jerry had a something."
     
     #>>>Initializing Grid 1
     print(">>>Initializing Grid 1")
@@ -86,9 +96,11 @@ if __name__ == "__main__":
     print(">>>Setting categories (map to yRows) and dates (map to xColumns)")
     gObj_1.setCategories(categories)
     gObj_1.setDates(dates)
+    gObj_1.setNotes(notes)
 
     print("Dates: " + str(gObj_1.getDates()))
     print("Categories: " + str(gObj_1.getCategories()))
+    print("Notes: " + str(gObj_1.getNotes()))
     print("\n\n")
 
     #>>>Setting data at (0,1) and (1,0)

@@ -10,17 +10,18 @@ class B:
             #--Otherwise, would memory leak occur because when addFrame is called...
             #--it is not displayed. Yet when frameMaker function is called, everything is recreated
             #--and then displayed...
-            temp = Frame(top, width = 40, height = 20, relief = "sunken", borderwidth = 2)
-
-            def back():
-                fsObj.setFlag("A")
-                fsObj.setData("")
-                temp.destroy()
-
-            temp2 = Label(temp, text = "B")
-            temp3 = Button(temp, text = "Back", command = back)
-
             if display:
+                temp = Frame(top, width = 40, height = 20, relief = "sunken", borderwidth = 2)
+
+                def back():
+                    fsObj.setFlag("A")
+                    fsObj.setData("")
+                    temp.destroy()
+
+                temp2 = Label(temp, text = "B")
+                temp3 = Button(temp, text = "Back", command = back)
+
+
                 print("B has data: " + fsObj.getData())
                 fsObj.setData("")
                 temp.pack()
