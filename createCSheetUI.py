@@ -4,6 +4,8 @@ from EntryReader import EntryReader
 from ObjectListBox import ObjectListBox
 from clCalendar import CLCalendar
 from frameSignaler import FrameSignaler
+from fileManager import FileManager
+from grid import Grid
 
 
 class CreateCSheetUI:
@@ -14,11 +16,15 @@ class CreateCSheetUI:
         def frameMaker(display = False):
 
             if display:
-                top = Frame(window, width = 500, height = 500, relief = "groove", borderwidth = 2)
+                master = Frame(window, width = 800, height = 600, relief = "groove", borderwidth = 2)
+                #top groups cat and dat related widgets together.
+                top = Frame(master, width = 285, height = 344, relief = "groove", borderwidth = 2)
 
-
-                ##'''Add Name Label, Name Entry Box, and Back here.'''
-
+                ##'''Add Name Label and Name Entry Box here.'''
+                nameLabel = Label(master, text = "Name:", relief = "groove", borderwidth = 2)
+                nameEntry = Entry(master, width = 50)
+                noteLabel = Label(master, text = "Note:", relief = "groove", borderwidth = 2)
+                noteText = Text(master, width = 50, height = 5)
 
                 #viewport for category data
                 catViewport = Frame(top, width = 40, height = 20)
@@ -26,7 +32,7 @@ class CreateCSheetUI:
                 catScrollbar = Scrollbar(catViewport)
                 catScrollbar.pack(side = RIGHT, fill = Y)
 
-                catOLB = ObjectListBox(catViewport, 5, yscrollcommand = catScrollbar.set)
+                catOLB = ObjectListBox(catViewport, 0, yscrollcommand = catScrollbar.set)
                 catOLB.pack()
 
                 #viewport for date data
@@ -84,6 +90,37 @@ class CreateCSheetUI:
                         print(datOLB.getList())
  
                 ##Add Clear, Create, and Back Callbacks here.
+                def clearData():
+                    catOLB.setSize(0)
+                    datOLB.setSize(0)
+                    nameEntry.delete(0, END)
+                    noteText.delete("0.0", "end")
+
+                def createCSheet():
+                    catList = catOLB.getList()
+                    datList = datOLB.getList()
+                    fileName = nameEntry.get()
+                    noteStr = "".join(noteText.get("0.0", "end").split("\n"))
+
+                    gObj = Grid(len(catList), len(datList))
+                    gObj.setDates(datList)
+                    gObj.setCategories(catList)
+                    gObj.setNotes(noteStr)
+
+                    FileManager.createFile(gObj, fileName)
+
+                    for widget in window.winfo_children():
+                        widget.destroy()
+                    fsObj.setFlag("logCSheetUI")
+                    fsObj.setData(fileName)
+                    
+
+                def back():
+                    for widget in window.winfo_children():
+                        widget.destroy()
+                    fsObj.setFlag("homepageUI")
+                    fsObj.setData("")
+                    
 
                 '''
                 #mouseCallback taken from this site...
@@ -111,7 +148,10 @@ class CreateCSheetUI:
                 RB_5 = Radiobutton(datCFrame, text = "DayRange", variable = datUnit, value = 5)
                 RB_6 = Radiobutton(datCFrame, text = "NumRange", variable = datUnit, value = 6)
 
-                ##Add Clear, Create, and Back Controls here.
+                #Clear, Create, and Back Controls
+                clearB = Button(master, text = "Clear", command = clearData, width = 8, height = 2)
+                createB = Button(master, text = "Create", command = createCSheet, width = 8, height = 2)
+                backB = Button(master, text = "Back", command = back, width = 8, height = 2)
 
                 #Laying out catCFrame
                 catEntryObj.place(x = 0, y = 3)
@@ -139,11 +179,19 @@ class CreateCSheetUI:
                 datScrollbar.config(command = datOLB.yview())
                 catCFrame.place(x = 0, y = 160)
                 datCFrame.place(x = 141, y = 160)
+                nameLabel.place(x = 100, y= 0)
+                nameEntry.place(x = 150, y = 0)
+                clearB.place(x = 650, y = 500)
+                createB.place(x = 720, y = 500)
+                backB.place(x = 0, y = 0)
+                noteLabel.place(x = 150, y = 500)
+                noteText.place(x = 200, y = 500)
 
                 #packing top
-                top.pack()
+                top.place(x = 250, y = 100)
+                master.place(x = 0, y = 0)
         frameMaker()
-        return ["CreateCSheetUI", frameMaker]
+        return ["createCSheetUI", frameMaker]
 
     @classmethod
     def testFrame(self):
@@ -152,7 +200,7 @@ class CreateCSheetUI:
         #as it is different from the testFrame method in the
         #Home Screen class.
         window = Tk()
-        window.geometry("600x600")
+        window.geometry("800x600")
         fsObj = FrameSignaler
         temp = self.addFrame(window, fsObj)
         temp[1](True)

@@ -8,12 +8,12 @@ Window.geometry("200x200+50+50") # heightxwidth+x+y
 mainPanel = Canvas(Window, width = 200, height = 200) # main screen
 mainPanel.pack()
 
-entry_text = StringVar() # the text in  your entry
-entry_widget = Entry(mainPanel, width = 20, textvariable = entry_text) # the entry
-mainPanel.create_window(100, 100, window = entry_widget)
+eObjVar = StringVar() # the text in  your entry
+eObj = Entry(mainPanel, width = 20, textvariable = eObjVar) # the entry
+mainPanel.create_window(100, 100, window = eObj)
 
-def character_limit(entry_text):
-    if len(entry_text.get()) > 5:#If greater than set character max...
-        entry_text.set(entry_text.get()[:-1])#Will prevent user from typing more characters.
+def character_limit(eObjVar):
+    if len(eObjVar.get()) > 50:#If greater than set character max...
+        eObjVar.set(eObjVar.get()[:-1])#Will prevent user from typing more characters.
 
-entry_text.trace("w", lambda *args: character_limit(entry_text))
+eObjVar.trace("w", lambda *args: character_limit(eObjVar))

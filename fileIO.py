@@ -43,7 +43,7 @@ class FileIO:
             print("Invalid selectedFileName.")
         
 if __name__ == "__main__":
-    #gObj = Grid.fromRepr("1/1,1/2\nA,B\nNone,X\nX,None")
-    #FileIO.writeDataTo(repr(gObj), "test")
-    #print(FileIO.readDataFrom("test"))
+    gObj = Grid.fromRepr("1/1,1/2\nA,B\nTest note...\nNone,X\nX,None")
+    FileIO.writeDataTo(repr(gObj), "test")
+    print(FileIO.readDataFrom("test"))
     print(FileIO.getFileNames())

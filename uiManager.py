@@ -3,14 +3,18 @@ from frameSignaler import FrameSignaler
 from frameSwitcher import FrameSwitcher
 from testUIA import A
 from testUIB import B
+from homepageUI import HomepageUI
+from giveFeedbackUI import GiveFeedbackUI
+from createCSheetUI import CreateCSheetUI
 
 
 class uiManager:
     def __init__(self):
         fsObj = self._getFrameSignaler()
-        top = Tk()
-        FrameSwitcher.addFrame(A.addFrame(top, fsObj))
-        FrameSwitcher.addFrame(B.addFrame(top, fsObj))
+        window = Tk()
+        FrameSwitcher.addFrame(HomepageUI.addFrame(window, fsObj))
+        FrameSwitcher.addFrame(GiveFeedbackUI.addFrame(window, fsObj))
+        FrameSwitcher.addFrame(CreateCSheetUI.addFrame(window, fsObj))
 
         # checkFrameSignaler checks for any flags, if any then
         # it switches to appropriate frame.
@@ -18,10 +22,10 @@ class uiManager:
             print(fsObj.getFlag())
             print(fsObj.getData())
             FrameSwitcher.checkFrameSignaler(fsObj)
-            top.after(1000, checkFrameSignaler)
+            window.after(1000, checkFrameSignaler)
 
         checkFrameSignaler()
-        top.mainloop()
+        window.mainloop()
 
     def _getFrameSignaler(self):
         return FrameSignaler
