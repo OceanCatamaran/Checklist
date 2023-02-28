@@ -8,7 +8,7 @@ class GiveFeedbackUI:
       #This method adds the screen to the window from UIManager.
       def frameMaker(display = False):
          if display:
-            feedback = Frame(window, width = 800, height = 600, relief = "groove", borderwidth = 2, bg = "white")
+            feedback = Frame(window, relief = "groove", borderwidth = 2, bg = "white")
 ##            feedback.title("Get Help")
 ##            feedback.configure(width=600, height=800, bg='white')
 ##            feedback.geometry("600x800+735+300")
@@ -77,7 +77,7 @@ class GiveFeedbackUI:
             label_6 = Label(feedback, text = "Q: How can you edit your current C-Sheet?")
             label_6.configure(bg="white",fg="black")
             label_6.pack()
-            feedback.pack()
+            feedback.pack(fill = BOTH, expand = True)
       frameMaker()
       return ["feedbackUI", frameMaker]
    

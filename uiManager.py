@@ -12,6 +12,7 @@ class uiManager:
     def __init__(self):
         fsObj = self._getFrameSignaler()
         window = Tk()
+        window.geometry("800x600")
         FrameSwitcher.addFrame(HomepageUI.addFrame(window, fsObj))
         FrameSwitcher.addFrame(GiveFeedbackUI.addFrame(window, fsObj))
         FrameSwitcher.addFrame(CreateCSheetUI.addFrame(window, fsObj))
