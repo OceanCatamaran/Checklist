@@ -1,8 +1,6 @@
 from tkinter import *
 from frameSignaler import FrameSignaler
 from frameSwitcher import FrameSwitcher
-from testUIA import A
-from testUIB import B
 from homepageUI import HomepageUI
 from giveFeedbackUI import GiveFeedbackUI
 from createCSheetUI import CreateCSheetUI
@@ -13,6 +11,7 @@ class uiManager:
         fsObj = self._getFrameSignaler()
         window = Tk()
         window.geometry("800x600")
+        window.resizable(False, False)
         FrameSwitcher.addFrame(HomepageUI.addFrame(window, fsObj))
         FrameSwitcher.addFrame(GiveFeedbackUI.addFrame(window, fsObj))
         FrameSwitcher.addFrame(CreateCSheetUI.addFrame(window, fsObj))
@@ -30,12 +29,6 @@ class uiManager:
 
     def _getFrameSignaler(self):
         return FrameSignaler
-
-
-#    def printFrameSignaler(self, top, fsObj):
-#       print(fsObj.getFlag())
-#       print(fsObj.getData())
-#       top.after(top, 1000, self.printFrameSignaler())
 
 
 if __name__ == "__main__":
