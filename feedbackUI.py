@@ -51,7 +51,7 @@ label_6 = Label(my_window, text = "Q: How can you edit your current C-Sheet?")
 label_6.configure(bg="white")
 label_6.pack()
 
-label_6 = Label(my_window, text = "Q: How can you edit your current C-Sheet?")
+label_6 = Label(my_window, text = "A: From the Home Page press Select, then press edit.")
 label_6.configure(bg="white")
 label_6.pack()
 
