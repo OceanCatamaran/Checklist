@@ -20,7 +20,7 @@ class CreateCSheetUI:
                 #top groups cat and dat related widgets together.
                 top = Frame(master, width = 285, height = 344, relief = "groove", borderwidth = 2)
 
-                ##'''Add Name Label and Name Entry Box here.'''
+                #Name Label and Name Entry Box
                 nameLabel = Label(master, text = "Name:", relief = "groove", borderwidth = 2)
                 nameEntry = Entry(master, width = 50)
                 noteLabel = Label(master, text = "Note:", relief = "groove", borderwidth = 2)
@@ -89,7 +89,11 @@ class CreateCSheetUI:
                         datOLB.overWriteWith(result)
                         print(datOLB.getList())
  
-                ##Add Clear, Create, and Back Callbacks here.
+                #Clear, Create, and Back Callbacks
+                def destroyScreen():
+                   for widget in window.winfo_children():
+                            widget.destroy()
+
                 def clearData():
                     catOLB.setSize(0)
                     datOLB.setSize(0)
@@ -109,15 +113,13 @@ class CreateCSheetUI:
 
                     FileManager.createFile(gObj, fileName)
 
-                    for widget in window.winfo_children():
-                        widget.destroy()
+                    destroyScreen()
                     fsObj.setFlag("logCSheetUI")
                     fsObj.setData(fileName)
                     
 
                 def back():
-                    for widget in window.winfo_children():
-                        widget.destroy()
+                    destroyScreen()
                     fsObj.setFlag("homepageUI")
                     fsObj.setData("")
                     

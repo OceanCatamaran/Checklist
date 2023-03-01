@@ -33,6 +33,12 @@ class FileManager:
         FileIO.writeDataTo(repr(updatedGrid), selectedFileName)
 
     @classmethod
+    def getFileDates(self) -> list:
+        #This method returns a list of File Dates that(if called directly after)
+        #getFileNames() will map to each filename.
+        return FileIO.getFileDates()
+
+    @classmethod
     def deleteFile(self, selectedFileName) -> None:
         FileIO.deleteFile(selectedFileName)
 
