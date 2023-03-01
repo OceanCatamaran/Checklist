@@ -74,7 +74,7 @@ class GiveFeedbackUI:
             label_6.configure(bg="white",fg="black")
             label_6.pack()
 
-            label_6 = Label(feedback, text = "Q: How can you edit your current C-Sheet?")
+            label_6 = Label(feedback, text = "A: From the Home Page press Select, then press edit.")
             label_6.configure(bg="white",fg="black")
             label_6.pack()
             feedback.pack(fill = BOTH, expand = True)
