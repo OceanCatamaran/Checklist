@@ -16,7 +16,7 @@ class LogCSheetUI:
 
                 #Creating Frames
                 frame = Frame(top, highlightbackground="black")
-                frame2 = Frame(top)
+                notes_frame = Frame(top)
 
                 #Initializing Canvas and its Frame?
                 canvas = Canvas(frame, width = 600, height = 300, bd = 0, highlightthickness = 0, bg = "white", scrollregion = [0,0,w,h])
@@ -41,15 +41,15 @@ class LogCSheetUI:
                         Entry(scrollable_frame,width=5).grid(row=i,column=j)
 
                 #Notes Section
-                notes_label = Label(frame2,text="Notes:",width = 10,height =3,borderwidth=1,relief="solid").grid(row=0,column=50,padx=40,sticky='E')
-                notes_box = Entry(frame2,width=30)
+                notes_label = Label(notes_frame,text="Notes:",width = 10,height =3,borderwidth=1,relief="solid").grid(row=0,column=50,padx=40,sticky='E')
+                notes_box = Entry(notes_frame,width=30)
                 notes_box.grid(row=0,column=100,ipady=30,sticky='W')
                 vertical_scrollbar.pack(side=RIGHT, fill=Y)
                 horizontal_scrollbar.pack(side=BOTTOM,fill=X)
 
                 #Packing widgets
                 frame.pack(padx=100,pady=100)
-                frame2.pack()
+                notes_frame.pack()
                 canvas.pack(side="left", fill="both", expand=True)
 
                 #packing top
@@ -64,7 +64,7 @@ class LogCSheetUI:
         #as it is different from the testFrame method in the
         #Home Screen class.
         window = Tk()
-        window.geometry("600x600")
+        window.geometry("800x600")
         fsObj = FrameSignaler
         temp = self.addFrame(window, fsObj)
         temp[1](True)
