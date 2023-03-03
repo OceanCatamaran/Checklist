@@ -5,6 +5,7 @@ from homepageUI import HomepageUI
 from giveFeedbackUI import GiveFeedbackUI
 from selectCSheetUI import SelectCSheetUI
 from createCSheetUI import CreateCSheetUI
+from logCSheetUI import LogCSheetUI
 
 
 class uiManager:
@@ -22,6 +23,7 @@ class uiManager:
         FrameSwitcher.addFrame(GiveFeedbackUI.addFrame(window, fsObj))
         FrameSwitcher.addFrame(CreateCSheetUI.addFrame(window, fsObj))
         FrameSwitcher.addFrame(SelectCSheetUI.addFrame(window, fsObj))
+        FrameSwitcher.addFrame(LogCSheetUI.addFrame(window, fsObj))
 
         # checkFrameSignaler checks for any flags, if any then
         # it switches to appropriate frame.

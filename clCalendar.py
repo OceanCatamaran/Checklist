@@ -149,6 +149,10 @@ class CLCalendar:
 
     @classmethod
     def getColumns(self, methodSelection, val_1, val_2) -> list:
+    #Based on the input a user gives for the dat viewport
+    #for values 1 and 2 (top and bottom entry widgets),
+    #these values are the bounds used to get the in-between
+    #values that will populate the xcolumn of the grid.
         try:
             match methodSelection:
                 case 1:

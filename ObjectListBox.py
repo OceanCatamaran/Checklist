@@ -56,7 +56,7 @@ class ObjectListBox:
         return (self._LBObj.get(index), self._slObj.getList()[index])
 
     def getList(self):
-        return self._slObj.getList()
+        return [val.replace(",", "") for val in self._slObj.getList()]
 
     def pack(self):
         self._LBObj.pack()

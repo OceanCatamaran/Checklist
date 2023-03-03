@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from sizeableList import SizeableList
 from EntryReader import EntryReader
 from ObjectListBox import ObjectListBox
@@ -16,6 +17,7 @@ class CreateCSheetUI:
         def frameMaker(display = False):
 
             if display:
+                global gObj
                 master = Frame(window, width = 800, height = 600, relief = "groove", borderwidth = 2)
                 #top groups cat and dat related widgets together.
                 top = Frame(master, width = 285, height = 344, relief = "groove", borderwidth = 2)
@@ -61,6 +63,27 @@ class CreateCSheetUI:
                    Until then, for testing purposes, will have to assume
                    user input will not be incorrect!'''
 
+                #createCSheetUI was called from selectCSheetUI Checker
+                update = False #Update is a bool value to determine whether the createCSheetUI should
+                               #use the createCSheet (if this is a new file), or use updateCSheet
+                               #(if this is an already existing file just being editted).
+                               ###Note### ~ I chose update because set is a reserved word.
+                selection = fsObj.getData()
+                print("checking")
+                if selection != "":
+                    print("found")
+                    nameEntry.insert(0, selection)
+                    nameEntry.config(state = "disabled")
+                    global gObj
+                    gObj = FileManager.getFile(selection)
+                    datOLB.overWriteWith(gObj.getDates())
+                    catOLB.overWriteWith(gObj.getCategories())
+                    noteText.insert("0.0", gObj.getNotes())
+                    update = True
+                else:
+                    print("notFound")
+
+
                 #CallBacks for the catCFrame Controls
                 def catSelectCallBack():
                     selection = catOLB.selection()
@@ -103,20 +126,39 @@ class CreateCSheetUI:
                 def createCSheet():
                     catList = catOLB.getList()
                     datList = datOLB.getList()
+                    fileName = (nameEntry.get()).replace(" ", "")
+                    if fileName == "":
+                        messagebox.showwarning("C-Sheet Name Error", "C-Sheet has no name.")
+                    else:
+                        noteStr = "".join(noteText.get("0.0", "end").split("\n"))
+                        if len(catList) == 0 or len(datList) == 0:
+                            messagebox.showwarning("C-Sheet Category/Date Error", "C-Sheet has no Categories and/or Dates.")
+                        else:
+                            gObj = Grid(len(catList), len(datList))
+                            gObj.setDates(datList)
+                            gObj.setCategories(catList)
+                            gObj.setNotes(noteStr)
+
+                            FileManager.createFile(gObj, fileName)
+
+                            destroyScreen()
+                            fsObj.setFlag("logCSheetUI")
+                            fsObj.setData(fileName)
+
+                def updateCSheet():
+                    catList = catOLB.getList()
+                    datList = datOLB.getList()
                     fileName = nameEntry.get()
                     noteStr = "".join(noteText.get("0.0", "end").split("\n"))
 
-                    gObj = Grid(len(catList), len(datList))
-                    gObj.setDates(datList)
-                    gObj.setCategories(catList)
-                    gObj.setNotes(noteStr)
+                    global gObj
+                    gObj.updateGrid(datList, catList, noteStr)
 
-                    FileManager.createFile(gObj, fileName)
+                    FileManager.setFile(gObj, fileName)
 
                     destroyScreen()
                     fsObj.setFlag("logCSheetUI")
                     fsObj.setData(fileName)
-                    
 
                 def back():
                     destroyScreen()
@@ -152,7 +194,10 @@ class CreateCSheetUI:
 
                 #Clear, Create, and Back Controls
                 clearB = Button(master, text = "Clear", command = clearData, width = 8, height = 2)
-                createB = Button(master, text = "Create", command = createCSheet, width = 8, height = 2)
+                if update:
+                    updateB = Button(master, text = "Update", command = updateCSheet, width = 8, height = 2)
+                else:
+                    createB = Button(master, text = "Create", command = createCSheet, width = 8, height = 2)
                 backB = Button(master, text = "Back", command = back, width = 8, height = 2)
 
                 #Laying out catCFrame
@@ -184,7 +229,10 @@ class CreateCSheetUI:
                 nameLabel.place(x = 100, y= 0)
                 nameEntry.place(x = 150, y = 0)
                 clearB.place(x = 650, y = 500)
-                createB.place(x = 720, y = 500)
+                if update:
+                    updateB.place(x = 720, y = 500)
+                else:
+                    createB.place(x = 720, y = 500)
                 backB.place(x = 0, y = 0)
                 noteLabel.place(x = 150, y = 500)
                 noteText.place(x = 200, y = 500)

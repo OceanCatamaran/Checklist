@@ -30,9 +30,9 @@ class GridCellManager:
 
         #Creating corresponding Entry widgets by column and row.
 
-        self._datEntries = [Entry(window, width = 5) for _ in range((len(self._dates) + 1))]
-        self._catEntries = [Entry(window, width = 5) for _ in range(len(self._categories))]
-        self._cellEntries = [[Entry(window, width = 5) for _ in range(len(self._dates))] for _ in range(len(self._categories))]
+        self._datEntries = [Entry(window, width = 15) for _ in range((len(self._dates) + 1))]
+        self._catEntries = [Entry(window, width = 15) for _ in range(len(self._categories))]
+        self._cellEntries = [[Entry(window, width = 15) for _ in range(len(self._dates))] for _ in range(len(self._categories))]
 
         #Test
         #print(self._datEntries)
@@ -51,13 +51,15 @@ class GridCellManager:
         for y in range(len(self._catEntries) + 1):
             for x in range(len(self._datEntries)):
                 placement[y][x].insert(0, str(fillIns[y][x]))
+                if y == 0 or x == 0:
+                    placement[y][x].config(state = "disabled")
                 placement[y][x].grid(row = y, column = x)
 
     def getGrid(self) -> Grid:
         outGrid = self._grid
         for y in range(len(self._cellEntries)):
             for x in range(len(self._cellEntries[0])):
-                outGrid.setAt(y, x, self._cellEntries[y][x].get())
+                outGrid.setAt(y, x, self._cellEntries[y][x].get().replace(",", ""))
         return outGrid
 
 if __name__ == "__main__":

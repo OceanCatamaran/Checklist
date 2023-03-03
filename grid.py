@@ -66,6 +66,29 @@ class Grid:
     def getAll(self):
         return self._grid
 
+    def updateGrid(self, dates, categories, notes):
+        currentGrid = self.getAll()
+        currentGridSize = len(currentGrid)
+        newGrid = []
+        shrink = (len(dates) < len(self.getDates()))
+        for y in range(len(categories)):
+            if y >= currentGridSize:
+                newGrid.append(["None" for _ in range(len(dates))])
+            else:
+                temp = currentGrid[y]
+                if shrink:
+                    temp = temp[0:len(dates)]
+                else:
+                    for _ in range((len(dates) - len(self.getDates()))):
+                        temp.append("None")
+                newGrid.append(temp)
+
+        self.setAll(newGrid)
+        self.setDates(dates)
+        self.setCategories(categories)
+        self.setNotes(notes)
+        
+
     def __str__(self):
         formattedGrid = []
         for yRow in self._grid:
@@ -132,6 +155,16 @@ if __name__ == "__main__":
     gObj_2 = Grid.fromRepr(gObj_1Data)
     print(gObj_2)
     print("\n\n")
-    
+
+    #>>>Testing updateGrid
+    print(">>>Testing Grid instantiation from another Grid (using repr)")
+    gObj_2.updateGrid(["11/11", "11/12", "11/3"], ["Y", "Z", "A"], "Another note...")
+    print(gObj_2)
+    print("\n\n")
+    gObj_2.updateGrid(["11/11"], ["Y"], "Another note, again...")
+    print(gObj_2)
+    print("\n\n")
+    gObj_2.updateGrid([], [], "Now there is nothing...")
+    print(gObj_2)
     
         
