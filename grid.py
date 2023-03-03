@@ -60,6 +60,12 @@ class Grid:
     def getAt(self, yRow, xColumn):
         return self._grid[yRow][xColumn]
 
+    def setAll(self, grid):
+        self._grid = grid
+
+    def getAll(self):
+        return self._grid
+
     def __str__(self):
         formattedGrid = []
         for yRow in self._grid:

@@ -1,5 +1,7 @@
 from tkinter import *
 from frameSignaler import FrameSignaler
+from fileManager import FileManager
+from gridCellManager import GridCellManager
 
 class LogCSheetUI:
 
@@ -36,16 +38,43 @@ class LogCSheetUI:
                 canvas.configure(xscrollcommand=horizontal_scrollbar.set)
 
                 #Adding cells to screen
-                for i in range(20):
-                    for j in range(20):
-                        Entry(scrollable_frame,width=5).grid(row=i,column=j)
+                gObjORG = FileManager.getFile(fsObj.getData())
+                gcmObj = GridCellManager(gObjORG, scrollable_frame)
 
                 #Notes Section
-                notes_label = Label(notes_frame,text="Notes:",width = 10,height =3,borderwidth=1,relief="solid").grid(row=0,column=50,padx=40,sticky='E')
-                notes_box = Entry(notes_frame,width=30)
-                notes_box.grid(row=0,column=100,ipady=30,sticky='W')
+                notes_label = Label(notes_frame,text="Notes:",width = 10,height =3, highlightthickness=0, pady=0, borderwidth=1,relief="solid")
+                notes_box = Text(notes_frame, width = 50, height = 5)
+                notes_box.insert("0.0", gObjORG.getNotes())
+                notes_label.pack(side = LEFT, anchor = "nw")
+                notes_box.pack(side = BOTTOM, anchor = "n", fill = X, expand = False)
+               
                 vertical_scrollbar.pack(side=RIGHT, fill=Y)
                 horizontal_scrollbar.pack(side=BOTTOM,fill=X)
+
+                #Callbacks
+                def destroyScreen():
+                    for widget in window.winfo_children():
+                        widget.destroy()
+                        
+                def saveCSheet():
+                    gObjNEW = gcmObj.getGrid()
+                    gObjNEW.setNotes("".join(notes_box.get("0.0", "end").split("\n")))
+                    print(gObjNEW)
+                    FileManager.setFile(gObjNEW, fsObj.getData())
+
+                def back():
+                    destroyScreen()
+                    fsObj.setFlag("homepageUI")
+                    fsObj.setData("")
+
+                #Save Button
+                saveB = Button(window, width = 8, height = 2, text = "Save", command = saveCSheet)
+                saveB.pack(side = RIGHT, anchor = "nw")
+
+
+                #Back Button
+                backB = Button(window, width = 8, height = 2, text = "Back", command = back)
+                backB.pack(side = LEFT, anchor = "ne")
 
                 #Packing widgets
                 frame.pack(padx=100,pady=100)
@@ -53,9 +82,9 @@ class LogCSheetUI:
                 canvas.pack(side="left", fill="both", expand=True)
 
                 #packing top
-                top.pack()
+                top.place(x = 0, y = 0)
         frameMaker()
-        return ["LogCSheetUI", frameMaker]
+        return ["logCSheetUI", frameMaker]
 
     @classmethod
     def testFrame(self):
@@ -66,6 +95,7 @@ class LogCSheetUI:
         window = Tk()
         window.geometry("800x600")
         fsObj = FrameSignaler
+        fsObj.setData("test")
         temp = self.addFrame(window, fsObj)
         temp[1](True)
 
