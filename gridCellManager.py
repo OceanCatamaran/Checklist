@@ -59,7 +59,7 @@ class GridCellManager:
         outGrid = self._grid
         for y in range(len(self._cellEntries)):
             for x in range(len(self._cellEntries[0])):
-                outGrid.setAt(y, x, self._cellEntries[y][x].get().replace(",", ""))
+                outGrid.setAt(y, x, self._cellEntries[y][x].get().replace(",", "")[:20])
         return outGrid
 
 if __name__ == "__main__":

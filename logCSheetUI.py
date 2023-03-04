@@ -38,7 +38,8 @@ class LogCSheetUI:
                 canvas.configure(xscrollcommand=horizontal_scrollbar.set)
 
                 #Adding cells to screen
-                gObjORG = FileManager.getFile(fsObj.getData())
+                print(fsObj.getData().split(",")[0])
+                gObjORG = FileManager.getFile(fsObj.getData().split(",")[0])
                 gcmObj = GridCellManager(gObjORG, scrollable_frame)
 
                 #Notes Section
@@ -60,11 +61,12 @@ class LogCSheetUI:
                     gObjNEW = gcmObj.getGrid()
                     gObjNEW.setNotes("".join(notes_box.get("0.0", "end").split("\n")))
                     print(gObjNEW)
-                    FileManager.setFile(gObjNEW, fsObj.getData())
+                    FileManager.setFile(gObjNEW, fsObj.getData().split(",")[0])
 
                 def back():
                     destroyScreen()
-                    fsObj.setFlag("homepageUI")
+                    screen = fsObj.getData().split(",")[1]
+                    fsObj.setFlag(screen)
                     fsObj.setData("")
 
                 #Save Button
@@ -95,7 +97,7 @@ class LogCSheetUI:
         window = Tk()
         window.geometry("800x600")
         fsObj = FrameSignaler
-        fsObj.setData("test")
+        fsObj.setData("test,selectCSheetUI")
         temp = self.addFrame(window, fsObj)
         temp[1](True)
 

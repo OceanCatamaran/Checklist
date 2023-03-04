@@ -95,7 +95,7 @@ class SelectCSheetUI:
                     if(selected):
                         destroyScreen()
                         fsObj.setFlag("logCSheetUI")
-                        fsObj.setData(selected)
+                        fsObj.setData(",".join([selected, "selectCSheetUI"]))
                         
                     
                 def edit_csheet():

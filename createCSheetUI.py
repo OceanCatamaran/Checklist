@@ -69,6 +69,7 @@ class CreateCSheetUI:
                                #(if this is an already existing file just being editted).
                                ###Note### ~ I chose update because set is a reserved word.
                 selection = fsObj.getData()
+                print(selection)
                 print("checking")
                 if selection != "":
                     print("found")
@@ -104,13 +105,13 @@ class CreateCSheetUI:
                 #CallBacks for the datCFrame Controls
                 def datSelectCallBack():
                     num = datUnit.get()
-                    print(str(num) + " is of type " + str(type(num)))
-                    val_1 = datEntryObjBeg.get()
-                    val_2 = datEntryObjEnd.get()
+                    #print(str(num) + " is of type " + str(type(num)))
+                    val_1 = datEntryObjBeg.get()[:14]
+                    val_2 = datEntryObjEnd.get()[:14]
                     result = CLCalendar.getColumns(num, val_1, val_2)
                     if result != None:
                         datOLB.overWriteWith(result)
-                        print(datOLB.getList())
+                        #print(datOLB.getList())
  
                 #Clear, Create, and Back Callbacks
                 def destroyScreen():
@@ -126,11 +127,11 @@ class CreateCSheetUI:
                 def createCSheet():
                     catList = catOLB.getList()
                     datList = datOLB.getList()
-                    fileName = (nameEntry.get()).replace(" ", "")
+                    fileName = (nameEntry.get()).replace(" ", "")[:50]
                     if fileName == "":
                         messagebox.showwarning("C-Sheet Name Error", "C-Sheet has no name.")
                     else:
-                        noteStr = "".join(noteText.get("0.0", "end").split("\n"))
+                        noteStr = "".join(noteText.get("0.0", "end").split("\n"))[:250]
                         if len(catList) == 0 or len(datList) == 0:
                             messagebox.showwarning("C-Sheet Category/Date Error", "C-Sheet has no Categories and/or Dates.")
                         else:
@@ -143,13 +144,13 @@ class CreateCSheetUI:
 
                             destroyScreen()
                             fsObj.setFlag("logCSheetUI")
-                            fsObj.setData(fileName)
+                            fsObj.setData(",".join([fileName, "homepageUI"]))
 
                 def updateCSheet():
                     catList = catOLB.getList()
                     datList = datOLB.getList()
                     fileName = nameEntry.get()
-                    noteStr = "".join(noteText.get("0.0", "end").split("\n"))
+                    noteStr = "".join(noteText.get("0.0", "end").split("\n"))[:250]
 
                     global gObj
                     gObj.updateGrid(datList, catList, noteStr)
@@ -157,12 +158,15 @@ class CreateCSheetUI:
                     FileManager.setFile(gObj, fileName)
 
                     destroyScreen()
-                    fsObj.setFlag("logCSheetUI")
+                    fsObj.setFlag("selectCSheetUI")
                     fsObj.setData(fileName)
 
                 def back():
                     destroyScreen()
-                    fsObj.setFlag("homepageUI")
+                    if update:
+                        fsObj.setFlag("selectCSheetUI")
+                    else:
+                        fsObj.setFlag("homepageUI")
                     fsObj.setData("")
                     
 
