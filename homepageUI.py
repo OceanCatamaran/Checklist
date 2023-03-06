@@ -9,10 +9,19 @@ class HomepageUI:
         def frameMaker(display = False):
             if display:
                 # initialize home page window
-                home_page = Frame(window, width = 800, height = 600, relief = "groove", borderwidth = 2)
+                home_page = Frame(window, width = 800, height = 600, bg = "white")
 
                 # create frame for options
-                page_frame = Frame(home_page)
+                page_frame = Frame(home_page, bg = "white")
+
+                #Banner
+                bfObj = Frame(window, width = 800, height = 94, bg= "white")
+                banner = PhotoImage(file = "Bhomepage.gif")
+                bannerLabel = Label(bfObj, image = banner)
+                bannerLabel.image = banner
+
+                bfObj.place(x = 0, y = 0)
+                bannerLabel.pack(fill = "both")                
 
 
                 # callbacks
@@ -36,9 +45,8 @@ class HomepageUI:
                     fsObj.setData("")
 
                 # create options buttons for frame
-                create_page = Button(page_frame, text="Create", width="50", command = createCSheet)
-                select_page = Button(page_frame, text="Select", width="50", command = selectCSheet)
-
+                create_page = Button(page_frame, text="Create", width="50", command = createCSheet, borderwidth = 2)
+                select_page = Button(page_frame, text="Select", width="50", command = selectCSheet, borderwidth = 2)
                 create_page.pack(pady=20)
                 select_page.pack()
 
@@ -47,7 +55,7 @@ class HomepageUI:
 
 
                 # create feedback button
-                feedback_button = Button(page_frame, text="?", width="3", command = feedback)
+                feedback_button = Button(page_frame, text="?", width="3", command = feedback, borderwidth = 2,)
                 feedback_button.pack(anchor="w", padx=0, pady=(25, 0))
 
                 #Grid.rowconfigure(option_frame, 0, weight=1)
@@ -57,7 +65,7 @@ class HomepageUI:
                 #create_page.grid(row=0, column=0, sticky="NSEW")
                 #select_page.grid(row=1, column=0, sticky="NSEW")
 
-                create_page.grid # Should this line be here?
+                #create_page.grid # Should this line be here?
 
                 page_frame.place(in_=home_page, anchor="c", relx=0.5, rely=0.5)
                 home_page.pack()

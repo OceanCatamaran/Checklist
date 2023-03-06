@@ -18,15 +18,16 @@ class CreateCSheetUI:
 
             if display:
                 global gObj
-                master = Frame(window, width = 800, height = 600, relief = "groove", borderwidth = 2)
+                master = Frame(window, width = 800, height = 600, relief = "groove", borderwidth = 2, bg = "white")
                 #top groups cat and dat related widgets together.
                 top = Frame(master, width = 285, height = 344, relief = "groove", borderwidth = 2)
+                
 
                 #Name Label and Name Entry Box
                 nameLabel = Label(master, text = "Name:", relief = "groove", borderwidth = 2)
-                nameEntry = Entry(master, width = 50)
+                nameEntry = Entry(master, width = 50, relief = "groove", borderwidth = 2)
                 noteLabel = Label(master, text = "Note:", relief = "groove", borderwidth = 2)
-                noteText = Text(master, width = 50, height = 5)
+                noteText = Text(master, width = 50, height = 5, relief = "groove", borderwidth = 2)
 
                 #viewport for category data
                 catViewport = Frame(top, width = 40, height = 20)
@@ -84,6 +85,15 @@ class CreateCSheetUI:
                 else:
                     print("notFound")
 
+                #Banner
+                bfObj = Frame(window, width = 800, height = 94, bg= "white")
+                bannerName = "BEditCSheet.gif" if update else "BCreateCSheet.gif"
+                banner = PhotoImage(file = bannerName)
+                bannerLabel = Label(bfObj, image = banner)
+                bannerLabel.image = banner
+
+                bfObj.pack(fill = "both")
+                bannerLabel.pack(fill = "both")
 
                 #CallBacks for the catCFrame Controls
                 def catSelectCallBack():
@@ -232,18 +242,18 @@ class CreateCSheetUI:
                 datCFrame.place(x = 141, y = 160)
                 nameLabel.place(x = 100, y= 0)
                 nameEntry.place(x = 150, y = 0)
-                clearB.place(x = 650, y = 500)
+                clearB.place(x = 650, y = 400)
                 if update:
-                    updateB.place(x = 720, y = 500)
+                    updateB.place(x = 720, y = 400)
                 else:
-                    createB.place(x = 720, y = 500)
+                    createB.place(x = 720, y = 400)
                 backB.place(x = 0, y = 0)
-                noteLabel.place(x = 150, y = 500)
-                noteText.place(x = 200, y = 500)
+                noteLabel.place(x = 150, y = 400)
+                noteText.place(x = 200, y = 400)
 
                 #packing top
-                top.place(x = 250, y = 100)
-                master.place(x = 0, y = 0)
+                top.place(x = 250, y = 35)
+                master.pack(fill = "both", expand = True)
         frameMaker()
         return ["createCSheetUI", frameMaker]
 
