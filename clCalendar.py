@@ -1,5 +1,6 @@
 from datetime import date
 from calendar import monthrange
+from re import match
 
 _RAW_CD = date.today()
 _rawCD = _RAW_CD
@@ -153,6 +154,9 @@ class CLCalendar:
     #for values 1 and 2 (top and bottom entry widgets),
     #these values are the bounds used to get the in-between
     #values that will populate the xcolumn of the grid.
+        match methodSelection:
+
+
         try:
             match methodSelection:
                 case 1:
