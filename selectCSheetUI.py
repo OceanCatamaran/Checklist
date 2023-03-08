@@ -17,6 +17,15 @@ class SelectCSheetUI:
                 treeview.heading('C-Sheets', text = 'C-Sheets')
                 treeview.heading('Date', text = 'Date')
 
+                #Banner
+                bfObj = Frame(window, width = 800, height = 94, bg= "white")
+                banner = PhotoImage(file = "BSelectCSheet.gif")
+                bannerLabel = Label(bfObj, image = banner)
+                bannerLabel.image = banner
+
+                bfObj.pack(fill = "both")
+                bannerLabel.pack(fill = "both")
+
                 #Backend functions
 
                 def select_treeview():

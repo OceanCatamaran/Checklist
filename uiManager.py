@@ -31,7 +31,7 @@ class uiManager:
             print(fsObj.getFlag())
             print(fsObj.getData())
             FrameSwitcher.checkFrameSignaler(fsObj)
-            window.after(1000, checkFrameSignaler)
+            window.after(250, checkFrameSignaler)
 
         checkFrameSignaler()
         window.mainloop()

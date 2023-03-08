@@ -8,10 +8,20 @@ class GiveFeedbackUI:
       #This method adds the screen to the window from UIManager.
       def frameMaker(display = False):
          if display:
-            feedback = Frame(window, relief = "groove", borderwidth = 2, bg = "white")
+            feedback = Frame(window, relief = "groove", borderwidth = 2, bg = "white", width = 800, height = 500)
 ##            feedback.title("Get Help")
 ##            feedback.configure(width=600, height=800, bg='white')
 ##            feedback.geometry("600x800+735+300")
+
+            #Banner
+            bfObj = Frame(window, width = 800, height = 94, bg= "white")
+            banner = PhotoImage(file = "BFAQ.gif")
+            bannerLabel = Label(bfObj, image = banner)
+            bannerLabel.image = banner
+
+            bfObj.pack(fill = "both")
+            bannerLabel.pack(fill = "both")
+
 
             def destroyScreen():
                for widget in window.winfo_children():
@@ -77,7 +87,7 @@ class GiveFeedbackUI:
             label_6 = Label(feedback, text = "A: From the Home Page press Select, then press edit.")
             label_6.configure(bg="white",fg="black")
             label_6.pack()
-            feedback.pack(fill = BOTH, expand = True)
+            feedback.pack(fill = "both", expand = True)
       frameMaker()
       return ["feedbackUI", frameMaker]
    
