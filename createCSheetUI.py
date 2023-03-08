@@ -24,10 +24,11 @@ class CreateCSheetUI:
                 
 
                 #Name Label and Name Entry Box
+                noteFrame = Frame(master, relief = "groove", bd = 2, bg = "white")
                 nameLabel = Label(master, text = "Name:", relief = "groove", borderwidth = 2)
                 nameEntry = Entry(master, width = 50, relief = "groove", borderwidth = 2)
-                noteLabel = Label(master, text = "Note:", relief = "groove", borderwidth = 2)
-                noteText = Text(master, width = 50, height = 5, relief = "groove", borderwidth = 2)
+                noteLabel = Label(noteFrame, text = "Notes:", pady = 20, padx = 20, relief = "groove", borderwidth = 2)
+                noteText = Text(noteFrame, width = 50, height = 5, relief = "groove", borderwidth = 2)
 
                 #viewport for category data
                 catViewport = Frame(top, width = 40, height = 20)
@@ -50,15 +51,15 @@ class CreateCSheetUI:
                 #inputs beneath catViewport
                 catCFrame = Frame(top, width = 140, height = 180, relief = "groove", borderwidth = 2)
                     #The C in catCFrame stands for controller (as it controls the cat. data)
-                catEntryObj = Entry(catCFrame, width = 15)
-                catNumEntryObj = Entry(catCFrame, width = 5)
+                catEntryObj = Entry(catCFrame, width = 15, bd = 2, relief = "groove")
+                catNumEntryObj = Entry(catCFrame, width = 5, bd = 2, relief = "groove")
                 catNumEntryObj.insert(0, "1")
                 catERObj = EntryReader(catNumEntryObj)
 
                 #inputs beneath dateViewPort
                 datCFrame = Frame(top, width = 140, height = 180, relief = "groove", borderwidth = 2)
-                datEntryObjBeg = Entry(datCFrame, width = 15)
-                datEntryObjEnd = Entry(datCFrame, width = 15)
+                datEntryObjBeg = Entry(datCFrame, width = 15, bd = 2, relief = "groove")
+                datEntryObjEnd = Entry(datCFrame, width = 15, bd = 2, relief = "groove")
                 datUnit = IntVar()
                 '''Need to create specialized EntryReader for dates!
                    Until then, for testing purposes, will have to assume
@@ -223,7 +224,7 @@ class CreateCSheetUI:
 
                 #Laying out datCFrame
                 datEntryObjBeg.place(x = 0, y = 0)
-                datEntryObjEnd.place(x = 0, y = 20)
+                datEntryObjEnd.place(x = 0, y = 19)
                 datSet.place(x = 97, y = 0)
                 RB_1.place(x = 0, y = 40)
                 RB_2.place(x = 0, y = 60)
@@ -248,11 +249,12 @@ class CreateCSheetUI:
                 else:
                     createB.place(x = 720, y = 400)
                 backB.place(x = 0, y = 0)
-                noteLabel.place(x = 150, y = 400)
-                noteText.place(x = 200, y = 400)
+                noteLabel.pack(side = LEFT, fill = "both", anchor = "nw")
+                noteText.pack(side = BOTTOM, anchor = "n", fill = X, expand = False)
 
                 #packing top
                 top.place(x = 250, y = 35)
+                noteFrame.place(x = 160, y = 400)
                 master.pack(fill = "both", expand = True)
         frameMaker()
         return ["createCSheetUI", frameMaker]

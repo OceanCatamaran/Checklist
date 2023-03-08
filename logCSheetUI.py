@@ -53,8 +53,16 @@ class LogCSheetUI:
                 gObjORG = FileManager.getFile(fsObj.getData().split(",")[0])
                 gcmObj = GridCellManager(gObjORG, scrollable_frame)
 
+                #Name Section
+                nameLabel = Label(top, text = "Name:", relief = "groove", borderwidth = 2)
+                nameEntry = Entry(top, width = 50, relief = "groove", borderwidth = 2)
+                nameEntry.insert(0, fsObj.getData().split(",")[0])
+                nameEntry.config(state = "disabled")
+                nameLabel.place(x = 100, y= 0)
+                nameEntry.place(x = 150, y = 0)
+
                 #Notes Section
-                notes_label = Label(notes_frame,text="Notes:",width = 10,height =3, highlightthickness=0, pady=0, borderwidth=1,relief="solid")
+                notes_label = Label(notes_frame,text="Notes:",width = 10,height =3, highlightthickness=0, pady=0, borderwidth=2, relief="groove")
                 notes_box = Text(notes_frame, width = 50, height = 5)
                 notes_box.insert("0.0", gObjORG.getNotes())
                 notes_label.pack(side = LEFT, fill = "both", anchor = "nw")

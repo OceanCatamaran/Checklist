@@ -12,7 +12,7 @@ class SelectCSheetUI:
         #This method adds the screen to the uiManager
         def frameMaker(display = False):
             if display:
-                frame = Frame(window, width = 800, height = 600, relief = "groove", borderwidth = 2)
+                frame = Frame(window, width = 800, height = 600, relief = "groove", borderwidth = 2, bg = "white")
                 treeview = ttk.Treeview(frame, column = ("C-Sheets", "Date"), show='headings', height = 30)
                 treeview.heading('C-Sheets', text = 'C-Sheets')
                 treeview.heading('Date', text = 'Date')
@@ -65,7 +65,7 @@ class SelectCSheetUI:
                 #GUI functions
 
                 def search_csheet():
-                    text = search_bar.get("1.0", "end-1c")
+                    text = search_bar.get()[0:30]
                     if (text == ""):
                         refresh_csheet_info()
                     else:
@@ -123,7 +123,7 @@ class SelectCSheetUI:
 
                 #Instantiating Widgets
                 backB = Button(frame, text = "Back", command = back, width = 8, height = 2)
-                search_bar = Text(frame, height = 1 ,width = 30)
+                search_bar = Entry(frame, width = 30, bd = 2, relief = "groove")
                 search_btn = Button(frame, text = "Search", command = search_csheet)
                 delete_btn =  Button(frame, text = "Delete", command = delete_csheet)
                 copy_btn =  Button(frame, text = "Copy", command = copy_csheet)
