@@ -5,11 +5,10 @@ from frameSignaler import FrameSignaler
 class HomepageUI:
     @classmethod
     def addFrame(self, window, fsObj):
-        # This method adds the screen to the window from UIManager.
-        def frameMaker(display=False):
+        #This method adds the screen to the window from UIManager.
+        def frameMaker(display = False):
             if display:
                 # initialize home page window
-                home_page = Frame(window, width=800, height=600, relief="groove", borderwidth=2)
                 home_page = Frame(window, width = 800, height = 600, bg = "white")
 
                 # create frame for options
@@ -17,18 +16,19 @@ class HomepageUI:
 
                 #Banner
                 bfObj = Frame(window, width = 800, height = 94, bg= "white")
-                banner = PhotoImage(file = "Bhomepage.gif")
+                banner = PhotoImage(file = "BannerResources/Bhomepage.gif")
                 bannerLabel = Label(bfObj, image = banner)
                 bannerLabel.image = banner
 
                 bfObj.place(x = 0, y = 0)
                 bannerLabel.pack(fill = "both")                
 
+
                 # callbacks
                 def destroyScreen():
                     for widget in window.winfo_children():
-                        widget.destroy()
-
+                            widget.destroy()
+                
                 def createCSheet():
                     destroyScreen()
                     fsObj.setFlag("createCSheetUI")
@@ -44,27 +44,17 @@ class HomepageUI:
                     fsObj.setFlag("feedbackUI")
                     fsObj.setData("")
 
-                # load icon photos
+                #load icon photos
                 faq_image = PhotoImage(file="ThemeResources/FAQ.png")
-                label = Label(image=faq_image)
-                label.image = faq_image
-
-                add_image = PhotoImage(file="ThemeResources/Add.png")
-                label = Label(image=add_image)
-                label.image = add_image
-
+                create_image = PhotoImage(file="ThemeResources/Create.png")
                 select_image = PhotoImage(file="ThemeResources/Select.png")
-                label = Label(image=select_image)
-                label.image = select_image
+                backArrow_image = PhotoImage(file="ThemeResources/BackArrow.png")
 
-                add_img = add_image.subsample(3, 3)
                 # create options buttons for frame
-                create_page = Button(page_frame, text="Create", width="50", photo=add_img, compound=LEFT,
-                                     command=createCSheet)
-                select_page = Button(page_frame, text="Select", width="50", command=selectCSheet)
-
-                create_page = Button(page_frame, text="Create", width="50", command = createCSheet, borderwidth = 2)
-                select_page = Button(page_frame, text="Select", width="50", command = selectCSheet, borderwidth = 2)
+                create_page = Button(page_frame, text="Create", width="250", image = create_image, compound=LEFT, command = createCSheet, borderwidth = 2)
+                create_page.image = create_image
+                select_page = Button(page_frame, text="Select", width="250", image = select_image, compound=LEFT, command = selectCSheet, borderwidth = 2)
+                select_page.image = select_image
                 create_page.pack(pady=20)
                 select_page.pack()
 
@@ -72,22 +62,15 @@ class HomepageUI:
                 page_frame.pack(padx=5, pady=20)
 
 
-
-
-
-                # Button(root, text='Click Me !', image=photo).pack(side=TOP)
                 # create feedback button
-                feedback_button = Button(page_frame, text="?", image=faq_image, height=25, width=25, command=feedback)
-                feedback_button = Button(page_frame, text="?", width="3", command = feedback, borderwidth = 2,)
+                feedback_button = Button(page_frame, text="?", image = faq_image, height = 25, width = 25, command = feedback, borderwidth = 2,)
+                feedback_button.image = faq_image
                 feedback_button.pack(anchor="w", padx=0, pady=(25, 0))
 
-                # Grid.rowconfigure(option_frame, 0, weight=1)
-                # Grid.columnconfigure(option_frame, 0, weight=1)
+                #Grid.rowconfigure(option_frame, 0, weight=1)
+                #Grid.columnconfigure(option_frame, 0, weight=1)
 
-                # create_page.grid(row=0, column=0, sticky="NSEW")
-                # select_page.grid(row=1, column=0, sticky="NSEW")
 
-                create_page.grid  # Should this line be here?
                 #create_page.grid(row=0, column=0, sticky="NSEW")
                 #select_page.grid(row=1, column=0, sticky="NSEW")
 
@@ -101,7 +84,7 @@ class HomepageUI:
 
     @classmethod
     def testFrame(self):
-        # This method is for testing the screen by itself
+        #This method is for testing the screen by itself
         window = Tk()
         window.geometry("800x600")
         fsObj = FrameSignaler
@@ -113,9 +96,8 @@ class HomepageUI:
             window.after(1000, printFrameSignaler)
 
         printFrameSignaler()
-
+        
         window.mainloop()
-
 
 if __name__ == "__main__":
     HomepageUI.testFrame()

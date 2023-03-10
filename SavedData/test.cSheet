@@ -1,8 +1,8 @@
 1/1,1/2,1/3,1/4
-A,B,C,D,E
-Some other kind of note...
-WOW,X,O,X
-X,O,X,O
-O,X,O,X
-X,O,X,O
-None,None,None,None
+Routine A,Routine B,Routine C,Routine D,Routine E
+Test note...
+None,X,None,X
+X,None,X,None
+None,X,None,X
+X,None,X,None
+None,X,None,X

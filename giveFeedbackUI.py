@@ -15,7 +15,7 @@ class GiveFeedbackUI:
 
             #Banner
             bfObj = Frame(window, width = 800, height = 94, bg= "white")
-            banner = PhotoImage(file = "BFAQ.gif")
+            banner = PhotoImage(file = "BannerResources/BFAQ.gif")
             bannerLabel = Label(bfObj, image = banner)
             bannerLabel.image = banner
 
@@ -32,7 +32,12 @@ class GiveFeedbackUI:
                fsObj.setFlag("homepageUI")
                fsObj.setData("")
 
-            backB = Button(feedback, text = "Back", command = back, width = 8, height = 2)
+            #load icon photo
+            backArrow_image = PhotoImage(file="ThemeResources/BackArrow.png")
+
+            #back button
+            backB = Button(feedback, image = backArrow_image, command = back, width = 50, height = 50)
+            backB.image = backArrow_image
             backB.place(x = 0, y = 0)
 
             space_1 = Label(feedback, text = " ",bg="white")
@@ -63,7 +68,7 @@ class GiveFeedbackUI:
             q_3 = Label(feedback, text="Q: What is a C-Sheet?",bg="white",fg="black")
             q_3.pack()
 
-            qa_3 = Label(feedback, text="A:C-Sheet is a checklist that can be tracked overtime.",bg="white",fg="black") 
+            qa_3 = Label(feedback, text="A: A C-Sheet is a form that keeps track of when a task (routine) is performed and its metadata.",bg="white",fg="black") 
             qa_3.pack()
 
             space_1 = Label(feedback, text = " ",bg="white")
@@ -73,20 +78,32 @@ class GiveFeedbackUI:
             label_3.configure(bg="white",fg="black")
             label_3.pack()
 
-            label_4 = Label(feedback, text = "A: Go to Home Page, press Create")
+            label_4 = Label(feedback, text = "A: Go to Home Page, click Create")
             label_4.configure(bg="white",fg="black")
             label_4.pack()
 
-            label_5 = Label(feedback, text = " ",bg="white")
-            label_5.pack()
+            space_2 = Label(feedback, text = " ",bg="white")
+            space_2.pack()
 
             label_6 = Label(feedback, text = "Q: How can you edit your current C-Sheet?")
             label_6.configure(bg="white",fg="black")
             label_6.pack()
 
-            label_6 = Label(feedback, text = "A: From the Home Page press Select, then press edit.")
+            label_6 = Label(feedback, text = "A: From the Home Page click Select, click on an existing C-Sheet, and then press edit.")
             label_6.configure(bg="white",fg="black")
             label_6.pack()
+            feedback.pack(fill = "both", expand = True)
+
+            space_3 = Label(feedback, text = " ",bg="white")
+            space_3.pack()
+
+            label_7 = Label(feedback, text = "Q: I used the search bar to find a C-Sheet, but how do I get a list of all C-Sheets?")
+            label_7.configure(bg="white",fg="black")
+            label_7.pack()
+
+            label_7 = Label(feedback, text = "A: Remove all characters from search bar, then click search.")
+            label_7.configure(bg="white",fg="black")
+            label_7.pack()
             feedback.pack(fill = "both", expand = True)
       frameMaker()
       return ["feedbackUI", frameMaker]
