@@ -79,6 +79,13 @@ class HomepageUI:
                 page_frame.place(in_=home_page, anchor="c", relx=0.5, rely=0.5)
                 home_page.pack()
 
+                #Decal
+                #load decal photos
+                dHomepage = PhotoImage(file = "DecalResources/Dhomepage.png")
+                dLabel = Label(home_page, image = dHomepage, height = 297, width = 197, bd = 0)
+                dLabel.image = dHomepage
+                dLabel.place(x = 600, y = 300)
+
         frameMaker(True)
         return ["homepageUI", frameMaker]
 

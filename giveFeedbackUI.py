@@ -8,7 +8,7 @@ class GiveFeedbackUI:
       #This method adds the screen to the window from UIManager.
       def frameMaker(display = False):
          if display:
-            feedback = Frame(window, relief = "groove", borderwidth = 2, bg = "white", width = 800, height = 500)
+            feedback = Frame(window, bg = "white", width = 800, height = 500)
 ##            feedback.title("Get Help")
 ##            feedback.configure(width=600, height=800, bg='white')
 ##            feedback.geometry("600x800+735+300")
@@ -105,6 +105,13 @@ class GiveFeedbackUI:
             label_7.configure(bg="white",fg="black")
             label_7.pack()
             feedback.pack(fill = "both", expand = True)
+
+            #Decal
+            #load decal photos
+            dFAQ = PhotoImage(file = "DecalResources/DFAQ.png")
+            dLabel = Label(feedback, image = dFAQ, height = 297, width = 190, bd = 0)
+            dLabel.image = dFAQ
+            dLabel.place(x = 625, y = 280)
       frameMaker()
       return ["feedbackUI", frameMaker]
    

@@ -128,11 +128,11 @@ class SelectCSheetUI:
                 backB.image = backArrow_image
                 
                 search_bar = Entry(frame, width = 30, bd = 2, relief = "groove")
-                search_btn = Button(frame, text = "Search", command = search_csheet)
-                delete_btn =  Button(frame, text = "Delete", command = delete_csheet)
-                copy_btn =  Button(frame, text = "Copy", command = copy_csheet)
-                log_btn = Button(frame, text = "Log", command = log_csheet)
-                edit_btn = Button(frame, text = 'Edit', command = edit_csheet)
+                search_btn = Button(frame, text = "Search", command = search_csheet, width = 10)
+                delete_btn =  Button(frame, text = "Delete", command = delete_csheet, width = 10)
+                copy_btn =  Button(frame, text = "Copy", command = copy_csheet, width = 10)
+                log_btn = Button(frame, text = "Log", command = log_csheet, width = 10)
+                edit_btn = Button(frame, text = 'Edit', command = edit_csheet, width = 10)
                 
                 #Packing Widgets
                 backB.pack(side = TOP, pady = 5, anchor = "w")
