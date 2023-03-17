@@ -1,7 +1,17 @@
 # Checklist
 General Purpose Task Management Software
 
-v_0.1:
+Requirements:
+- Windows OS
+- Python 3.11 or greater
+
+How to Run Checklist:
+- Click on the file named "uiManager.pyw" to run program.
+
+How to Exit Checklist:
+- Click on the X button on the top right of the window 
+  (refer to button red highlighted in the below image). 
+![image](https://user-images.githubusercontent.com/99517213/226064505-2726b18d-e069-461d-8eaf-b571b0768c97.png)
 
 
 Disclaimer
