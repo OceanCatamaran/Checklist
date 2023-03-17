@@ -1,6 +1,9 @@
 # Checklist
 General Purpose Task Management Software
 
+Demo Video:
+- https://youtu.be/S8Hurz9AHq0
+
 Requirements:
 - Windows OS
 - Python 3.11 or greater
